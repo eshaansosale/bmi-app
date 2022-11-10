@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:bmi2/second%20page.dart';
 /*
   Green : #12a644
   Grey  : #403f3d
@@ -21,7 +22,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   double _height=170.0;
   double _weight=75.0;
-  int _bmi=0;
+  int bmi=0;
   String _condition='Select Data';
   @override
   Widget build(BuildContext context) {
@@ -43,7 +44,7 @@ class _MyAppState extends State<MyApp> {
                   SizedBox(
                     width: double.infinity,
                     child: Container(
-                      child:Text("$_bmi",
+                      child:Text("$bmi",
                         style:TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -160,12 +161,16 @@ class _MyAppState extends State<MyApp> {
                         onPressed: (){
                           setState(() {
                             //18.5 - 25 Healthy 25-30 Overweight >30 Obesity
-                            _bmi=(_weight/((_height/100)*(_height/100))).round().toInt();
-                            if(_bmi>=18.5 && _bmi<=25) {_condition=" Normal";}
-                            else if(_bmi>25 && _bmi<=30) {_condition=" Overweight";}
-                            else if(_bmi>30) {_condition=" Obesity";}
+                            bmi=(_weight/((_height/100)*(_height/100))).round().toInt();
+                            if(bmi>=18.5 && bmi<=25) {_condition=" Normal";}
+                            else if(bmi>25 && bmi<=30) {_condition=" Overweight";}
+                            else if(bmi>30) {_condition=" Obesity";}
                             else  {_condition=" Underweight";}
                           });
+                          Navigator.push(context,
+                          MaterialPageRoute(builder:(context)=>
+                          secondpage(bmi: bmi ,)));
+
                         },
                         child: Text("Calculate",style: TextStyle(color: Colors.black,fontSize: 20.0),),
 
